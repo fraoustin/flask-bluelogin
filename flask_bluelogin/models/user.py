@@ -1,6 +1,6 @@
 # coding: utf-8
 from .base_model_ import Model
-from .users import Users
+from .users import Users, AlreadyExistUserError
 
 
 class User(Model):
@@ -144,6 +144,17 @@ class User(Model):
                 return True
         return False
 
+    def add_groups(self, *groups):
+        """
+        add groups for user
+
+        :param groups: group to add
+        :type groups: str
+        """
+        for group in groups:
+            if group not in self.groups:
+                self.groups = self.groups + [group,]
+
     def check_password(self, password):
         """
         Check password of user
@@ -154,3 +165,14 @@ class User(Model):
         :rtype: bool
         """
         return Users().check_password(self, password)
+    
+    def save(self):
+        """
+        set user on Users()
+        add if necessary
+        """
+        try:
+            Users().add_user(self)
+        except AlreadyExistUserError as e:
+            pass
+        Users().set_user(self)

@@ -13,4 +13,4 @@ __desc__ = "Flask BlueLogin module"
 __urlpkg__ = "https://github.com/fraoustin/flask-bluelogin.git"
 __entry_points__ = {}
 
-from flask_bluelogin.main import *
+from flask_bluelogin.main import BlueLogin
