@@ -63,8 +63,15 @@ class BlueLogin(Blueprint):
             self.add_url_rule('/login/ui/<path:filename>', 'static_web', static_web)
             self.add_url_rule('/login/ui/', 'static_web_index', static_web_index)
     
-    def add_check_login(self, endpoint, *groups):
+    def _add_check_login(self, endpoint, *groups):
         try:
             current_app.view_functions[endpoint] = check_login(*groups)(current_app.view_functions[endpoint])
         except RuntimeError as e:
             self._add_check_login_list.append([endpoint, groups])
+
+    def add_check_login(self, endpoints, *groups):
+        if isinstance(endpoint, list):
+            for endpoint in endpoints:
+                self._add_check_login(endpoint, *groups)
+        else:
+            self._add_check_login(endpoints, *groups)
