@@ -188,6 +188,9 @@ definitions:
       id:
         type: "string"
         description: "id of user"
+      active:
+        type: "boolean"
+        description: "state of user"
       groups:
         type: "array"
         items:
@@ -208,6 +211,9 @@ definitions:
       password:
         type: "string"
         description: "password of user"
+      active:
+        type: "boolean"
+        description: "state of user"
       groups:
         type: "array"
         items:
