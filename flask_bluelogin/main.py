@@ -70,7 +70,7 @@ class BlueLogin(Blueprint):
             self._add_check_login_list.append([endpoint, groups])
 
     def add_check_login(self, endpoints, *groups):
-        if isinstance(endpoint, list):
+        if isinstance(endpoints, list):
             for endpoint in endpoints:
                 self._add_check_login(endpoint, *groups)
         else:
