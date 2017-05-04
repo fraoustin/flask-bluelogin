@@ -23,7 +23,7 @@ def login():
         pass
     raise Unauthorized()
 
-@check_login()
+#@check_login()
 @to_json
 def logout():
     """
@@ -36,7 +36,7 @@ def logout():
     logout_user()
     return ret
 
-@check_login()
+#@check_login()
 @to_json
 def get_user(userId):
     """
@@ -51,7 +51,7 @@ def get_user(userId):
         raise Unauthorized()
     return Users().get_user(id=userId).to_dict()
 
-@check_login("admin")
+#@check_login("admin")
 @to_json
 def set_user(userId):
     """
@@ -71,7 +71,7 @@ def set_user(userId):
     Users().set_user(user)
     return user.to_dict()
 
-@check_login("admin")
+#@check_login("admin")
 @to_json
 def add_user():
     """

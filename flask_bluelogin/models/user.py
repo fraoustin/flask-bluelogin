@@ -1,10 +1,10 @@
 # coding: utf-8
 from .base_model_ import Model
-from .users import Users
+from .users import Users, AlreadyExistUserError
 
 
 class User(Model):
-    def __init__(self, id=None, password=None, groups=[], properties={}):
+    def __init__(self, id=None, password=None, groups=[], properties={}, active=True):
         """
         User 
 
@@ -16,11 +16,14 @@ class User(Model):
         :type properties: dict
         :param password: password of this User.
         :type password: str
+        :param active: state of this User.
+        :type active: boolean
         """
         self._id = id
         self._password = password
         self._groups = groups
         self._properties = properties
+        self._active = active
 
     @property
     def id(self):
@@ -72,7 +75,7 @@ class User(Model):
     def properties(self):
         """
         Gets dict of properties of this User.
-        list of group of user
+        dict of properties of user
 
         :return: The dict of properties of this User.
         :rtype: dict
@@ -89,6 +92,29 @@ class User(Model):
         :type properties: dict
         """
         self._properties= properties    
+
+    @property
+    def active(self):
+        """
+        Gets state of this User.
+        state of user
+
+        :return: The state of this User.
+        :rtype: boolean
+        """
+        return self._active
+
+    @active.setter
+    def active(self, active):
+        """
+        Sets state of this User.
+        state of user
+
+        :param active: The state of this User.
+        :type active: boolean
+        """
+        self._active= active   
+
 
     @property
     def password(self):
@@ -121,7 +147,7 @@ class User(Model):
     
     @property
     def is_active(self):
-            return True
+            return self.active
     
     @property
     def is_anonymous(self):
@@ -144,6 +170,17 @@ class User(Model):
                 return True
         return False
 
+    def add_groups(self, *groups):
+        """
+        add groups for user
+
+        :param groups: group to add
+        :type groups: str
+        """
+        for group in groups:
+            if group not in self.groups:
+                self.groups = self.groups + [group,]
+
     def check_password(self, password):
         """
         Check password of user
@@ -154,3 +191,14 @@ class User(Model):
         :rtype: bool
         """
         return Users().check_password(self, password)
+    
+    def save(self):
+        """
+        set user on Users()
+        add if necessary
+        """
+        try:
+            Users().add_user(self)
+        except AlreadyExistUserError as e:
+            pass
+        Users().set_user(self)
