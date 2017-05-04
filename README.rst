@@ -59,3 +59,4 @@ Usage
 
 
 
+You can use BlueLogin.add_check_login for add control login on endpoint
