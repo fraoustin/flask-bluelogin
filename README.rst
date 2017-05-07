@@ -26,10 +26,7 @@ Usage
 ::
 
     from flask import Flask, request, current_app
-    from flask_bluelogin import BlueLogin
-    from flask_bluelogin.models.user import User
-    from flask_bluelogin.models.users import Users
-    from flask_bluelogin.util import check_login
+    from flask_bluelogin import BlueLogin, User, Users, check_login
     import logging
 
     app = Flask(__name__)
