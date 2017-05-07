@@ -1,6 +1,11 @@
 Feature
 =======
 
+V. 0.2.1
+========
+
+- optimize import from module
+
 V. 0.2.0
 ========
 
