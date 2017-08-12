@@ -1,6 +1,11 @@
 Feature
 =======
 
+V. 0.2.2
+========
+
+- add param url_prefix in blueprint
+
 V. 0.2.1
 ========
 
