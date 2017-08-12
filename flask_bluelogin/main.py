@@ -24,8 +24,8 @@ def static_web(filename):
 
 class BlueLogin(Blueprint):
 
-    def __init__(self, name='bluelogin', import_name=__name__, ui_testing=False, group_name='admin', *args, **kwargs):
-        Blueprint.__init__(self, name, import_name, *args, **kwargs)
+    def __init__(self, name='bluelogin', import_name=__name__, ui_testing=False, url_prefix="", group_name='admin', *args, **kwargs):
+        Blueprint.__init__(self, name, import_name, url_prefix=url_prefix, *args, **kwargs)
         self._add_check_login_list = []
         self._grp = group_name
         self._add_url_rule(ui_testing)
