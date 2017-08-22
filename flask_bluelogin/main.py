@@ -5,7 +5,7 @@ import uuid
 from flask_login import LoginManager
 
 from flask import Blueprint, current_app, send_from_directory, redirect, request, send_file
-from .controllers.login_controller import login, logout, add_user, get_user, set_user
+from .controllers.login_controller import login, logout, current, add_user, get_user, set_user
 from .util import check_login
 from .models.users import Users
 
@@ -52,6 +52,8 @@ class BlueLogin(Blueprint):
     def _add_url_rule(self, ui_testing=False):
         self.add_url_rule('/logout', 'logout', logout, methods=['GET'])
         self.add_check_login("%s.logout" % self.name)
+        self.add_url_rule('/current', 'current', current, methods=['GET'])
+        self.add_check_login("%s.current" % self.name)
         self.add_url_rule('/login', 'login', login, methods=['PUT'])
         self.add_url_rule('/user', 'add_user', add_user, methods=['PUT'])
         self.add_check_login("%s.add_user" % self.name, self._grp)
