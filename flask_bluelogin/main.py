@@ -62,8 +62,8 @@ class BlueLogin(Blueprint):
         self.add_url_rule('/user/<userId>', 'set_user', set_user, methods=['PUT'])
         self.add_check_login("%s.set_user" % self.name, self._grp)
         if ui_testing:
-            self.add_url_rule('/login/ui/<path:filename>', 'static_web', static_web)
-            self.add_url_rule('/login/ui/', 'static_web_index', static_web_index)
+            self.add_url_rule('/ui/<path:filename>', 'static_web', static_web)
+            self.add_url_rule('/ui/', 'static_web_index', static_web_index)
     
     def _add_check_login(self, endpoint, *groups):
         try:
